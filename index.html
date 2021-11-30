@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-
-
 </head>
 <body>
-<div><span>Score: </span>
-    <span id="scoreEl"> 0 </span></div>
-<canvas id="myCanvas" style="border: black solid 1px"  ></canvas>
+<div style="width: fit-content; border: 1px solid mediumaquamarine; background-color: aqua">
+    <span>Score: </span>
+    <span id="scoreEl"> 0 </span>
+    <button id="music" onclick="playMucsic()">Play Music</button>
+</div>
+
+<canvas id="myCanvas" style="border: black solid 1px ; background-color: blanchedalmond"></canvas>
+
+<audio id="shootSound" >
+    <source src="shoot.wav" type="audio/mpeg">
+</audio>
+<audio id="bgSound">
+    <source src = "Buoc Qua Nhau - Vu.mp3">
+</audio>
 <script src="index.js"></script>
+
 </body>
 </html>

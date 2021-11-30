@@ -6,6 +6,11 @@ canvas.height = innerHeight
 
 let scoreEl = document.getElementById('scoreEl')
 
+function playMucsic() {
+    document.getElementById('bgSound').play()
+}
+
+
 class Player {
     constructor(x, y, radius, color) {
         this.x = x
@@ -72,7 +77,7 @@ class Enemy {
 let x = canvas.width / 2
 let y = canvas.height / 2
 
-let player = new Player(x, y, 15, 'blue')
+let player = new Player(x, y, 15, "rebeccapurple")
 let projectiles = []
 let enemies = []
 
@@ -125,23 +130,24 @@ function animate() {
         let dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
         if (dist - enemy.radius - player.radius < 1) {
             cancelAnimationFrame(animationID)
+
         }
+        //check radius - enemies
         projectiles.forEach((projectile, projectileIndex) => {
-            //check radius - enemies
             let dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
             if (dist - enemy.radius - projectile.radius < 1) {
                 if (enemy.radius - 10 > 10) {
                     //increas score
                     count += 1
                     scoreEl.innerHTML = count
-                    enemy.radius -= 10
+                    enemy.radius -= 5
                     setTimeout(() => {
-                        enemy.splice(index,1)
+                        enemy.splice(index, 1)
                         projectiles.splice(projectileIndex, 1)
                     }, 0)
                 } else {
                     setTimeout(() => {
-                        //increas score bigize
+                        //increas score bigSize
                         count += 3
                         scoreEl.innerHTML = count
                         enemies.splice(index, 1)
@@ -153,13 +159,22 @@ function animate() {
     })
 }
 
+//shoot
+let shootSoundEl =document.getElementById('shootSound')
+
 window.addEventListener('click', (event) => {
     let angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     let velocity = {
         x: Math.cos(angle) * 5,
         y: Math.sin(angle) * 5
     }
+
     projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', velocity))
+    shootSoundEl.play() ;
 })
-animate()
-spawnEnemies()
+
+    animate()
+    spawnEnemies()
+
+
+
